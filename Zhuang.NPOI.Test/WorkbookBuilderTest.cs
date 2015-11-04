@@ -21,5 +21,18 @@ namespace Zhuang.NPOI.Test
                 .SetColumnCaption("产品名称", "ProductName").SetColumnWidth(20)
                 .Build().Save(@"C:\npoitest.xls");
         }
+
+
+        [TestMethod]
+        public void XSSFWorkbookBuilderTest()
+        {
+            XSSFWorkbookBuilder builder = new XSSFWorkbookBuilder();
+            DataTable dt = _dba.QueryDataTable("select * from sys_product");
+            builder.SetDataTable(dt)
+                .SetColumnCaption("产品名称", "ProductName").SetColumnWidth(20)
+                .Build().Save(@"C:\npoitest.xlsx");
+        }
+
+        
     }
 }
