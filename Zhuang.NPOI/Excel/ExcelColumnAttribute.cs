@@ -26,8 +26,10 @@ namespace Zhuang.NPOI.Excel
 
             foreach (var pi in entityType.GetProperties())
             {
+                var attributes = pi.GetCustomAttributes(typeof(ExcelColumnAttribute), false);
+                if (attributes.Length < 1) continue;
 
-                dicResult.Add(((ExcelColumnAttribute)(pi.GetCustomAttributes(typeof(ExcelColumnAttribute), false)[0])).Name, pi.Name);
+                dicResult.Add(((ExcelColumnAttribute)(attributes[0])).Name, pi.Name);
             }
 
             return dicResult;

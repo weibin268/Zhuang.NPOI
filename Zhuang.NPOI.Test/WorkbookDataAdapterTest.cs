@@ -5,6 +5,8 @@ using NPOI.HSSF.UserModel;
 using System.IO;
 using System.Data;
 using Zhuang.Data.Utility;
+using System.Collections.Generic;
+using Zhuang.NPOI.Models;
 
 namespace Zhuang.NPOI.Test
 {
@@ -31,7 +33,20 @@ namespace Zhuang.NPOI.Test
         [TestMethod]
         public void ToListTest()
         {
+            IList<SysProduct> products = new WorkbookDataAdapter(new HSSFWorkbook(new FileStream(@"C:\npoitest.xls", FileMode.Open, FileAccess.Read)))
+                .SetColumnNameMapping(ExcelColumnAttribute.GetColumnNameMapping(typeof(SysProduct)))
+                .AddOnRowAdapt(c =>
+                {
+                    bool result = true;
+                    var record = (SysProduct)c.DataRow;
 
+                    return result;
+                }).ToList<SysProduct>();
+
+            foreach (var item in products)
+            {
+                Console.WriteLine(item.ProductCode+"|"+item.ProductName);
+            }
         }
     }
 }
