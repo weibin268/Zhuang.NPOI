@@ -11,7 +11,7 @@ namespace Zhuang.NPOI.Excel
 {
     public static class WorkbookExtensions
     {
-        public static void Download(this IWorkbook workbook, string fileName)
+        public static void Download4Web(this IWorkbook workbook, string fileName)
         {
             string contentType = string.Empty;
 
