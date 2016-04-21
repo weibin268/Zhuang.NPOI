@@ -36,7 +36,7 @@ namespace Zhuang.NPOI.Test
                     font.Boldweight = 600;
                     font.FontHeightInPoints = 11;
                 })
-                .Build().Save(@"C:\npoitest.xls");
+                .Build().SaveAs(@"C:\npoitest.xls");
         }
 
 
@@ -50,7 +50,7 @@ namespace Zhuang.NPOI.Test
             DataTable dt = _dba.QueryDataTable("select * from sys_product");
             builder.SetDataTable(dt)
                 .SetColumnCaption("产品名称", "ProductName").SetColumnWidth(20)
-                .Build().Save(@"C:\npoitest.xlsx");
+                .Build().SaveAs(@"C:\npoitest.xlsx");
         }
 
         

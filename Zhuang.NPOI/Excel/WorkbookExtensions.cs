@@ -54,7 +54,7 @@ namespace Zhuang.NPOI.Excel
 
         }
 
-        public static void Save(this IWorkbook workbook, string path)
+        public static void SaveAs(this IWorkbook workbook, string path)
         {
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
