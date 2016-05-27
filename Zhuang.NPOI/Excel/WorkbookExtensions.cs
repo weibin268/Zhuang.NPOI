@@ -26,21 +26,29 @@ namespace Zhuang.NPOI.Excel
                 contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             }
 
-            var request = HttpContext.Current.Request;
-            if (request.UserAgent.ToLower().IndexOf("msie") > -1)
+            Encoding encoding;
+            string browser = HttpContext.Current.Request.UserAgent.ToUpper();
+            if (browser.Contains("MS") == true && browser.Contains("IE") == true)
             {
-                fileName = System.Web.HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8);
+                fileName = HttpUtility.UrlEncode(fileName);
+                encoding = System.Text.Encoding.Default;
             }
-            else if (request.UserAgent.ToLower().IndexOf("firefox") > -1)
+            else if (browser.Contains("FIREFOX") == true)
             {
-                fileName = "\"" + fileName + "\"";
+                //fileName = fileName;
+                encoding = System.Text.Encoding.GetEncoding("GB2312");
+            }
+            else
+            {
+                fileName = HttpUtility.UrlEncode(fileName);
+                encoding = System.Text.Encoding.Default;
             }
 
             var response = HttpContext.Current.Response;
             response.Clear();
             response.ContentType = contentType;
-            response.Charset = "uft-8";
-            response.ContentEncoding = System.Text.Encoding.UTF8;
+            //response.Charset = "uft-8";
+            response.ContentEncoding = encoding;
             response.AddHeader("Content-Disposition", string.Format("attachment;filename={0}",fileName));
 
             using (MemoryStream ms = new MemoryStream())
