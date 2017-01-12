@@ -21,7 +21,7 @@ namespace Zhuang.NPOI.Test
         public void Test()
         {
 
-            string filePath = @"C:\Users\zwb\Desktop\aaaa.xlsx";
+            string filePath = @"C:\Users\zwb\Desktop\cartype.xlsx";
 
             using (var fs=new FileStream(filePath,FileMode.Open))
             { 
@@ -40,14 +40,22 @@ namespace Zhuang.NPOI.Test
                 {
                     foreach (DataColumn dc in dt.Columns)
                     {
+                        //if (dc.ColumnName.ToUpper() == "STATUS" || dc.ColumnName.ToUpper()== "BELONGTTYPE")
+                        //{
+                        //    dr[dc.ColumnName] = Int16.Parse(dr[dc.ColumnName].ToString());
+                        //}
+
+
                         if (string.IsNullOrEmpty(dr[dc.ColumnName].ToString()))
                         {
                             dr[dc.ColumnName] = DBNull.Value;
                         }
+
+
                     }
                 }
 
-                dt.TableName = "Biz_CarTypeUseRecord";
+                dt.TableName = "Biz_Cartype";
                 dba.BulkWriteToServer(dt);
 
 
