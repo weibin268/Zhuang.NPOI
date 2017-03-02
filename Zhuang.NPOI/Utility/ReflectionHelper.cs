@@ -23,5 +23,11 @@ namespace Zhuang.NPOI.Utility
         //    }
         //    return rtn;
         //}
+
+
+        //public static string GetExcelColumnName<T>(Expression<Func<T, object>> expr)
+        //{
+        //    return ExcelColumnAttribute.GetColumnNameMapping(typeof(T)).First(m => m.Value == GetPropertyName<T>(expr)).Key;
+        //}
     }
 }
