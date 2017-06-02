@@ -28,7 +28,8 @@ namespace Zhuang.NPOI.Excel
         IList<string> _lsShowColumn = new List<string>();
         int _defaultColumnWidth = -1;
         string _currentColumnName = string.Empty;
-        bool _showHeadRow = true; 
+        bool _showHeadRow = true;
+        string _sheetName = string.Empty;
         #endregion
 
         #region event
@@ -141,14 +142,22 @@ namespace Zhuang.NPOI.Excel
 
             return this;
         }
+
+        public WorkbookBuilder SetSheetName(string sheetName)
+        {
+            _sheetName = sheetName;
+            return this;
+        }
         #endregion
-        
+
         protected abstract IWorkbook CreateWorkbook();
 
         public IWorkbook Build()
         {
             IWorkbook workbook = CreateWorkbook();
-            var sheet = workbook.CreateSheet();
+
+            ISheet sheet = string.IsNullOrEmpty(_sheetName)?workbook.CreateSheet():workbook.CreateSheet(_sheetName);
+            
             int currentRowIndex = 0;
 
             if (_dataTable != null)
